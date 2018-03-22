@@ -7,6 +7,7 @@ void PrintIntro();
 void PlayGame();
 void PrintGuess(string Guess);
 string GetGuess();
+bool AskToPlayAgain();
 
 
 // entry point for the game
@@ -14,6 +15,7 @@ int main ()
 {
 	PrintIntro();
 	PlayGame();
+	AskToPlayAgain();
 	return 0; // exit the game
 }
 
@@ -53,4 +55,12 @@ void PrintGuess(string Guess)
 {
 	cout << "Your Guess was: " << Guess << endl << endl;
 	return;
+}
+
+bool AskToPlayAgain()
+{
+	cout << "Do you want to play again? ";
+	string Response = "";
+	getline(cin, Response);
+	return (Response[0] == 'y' || Response[0] == 'Y');
 }
