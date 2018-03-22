@@ -11,8 +11,12 @@ int main ()
 	PrintIntro();
 
 	// Get a Guess from the Player
-	GetGuessAndPrintBack();
-	GetGuessAndPrintBack();
+	constexpr int MAX_TRIES = 5;
+	for (int i = 1; i <= MAX_TRIES; i++)
+	{
+		GetGuessAndPrintBack();
+	}
+
 	return 0;
 }
 
@@ -29,8 +33,11 @@ void PrintIntro()
 string GetGuessAndPrintBack()
 {
 	string Guess = "";
+	// Ask the Guess to playes
 	cout << "Enter your Guess: ";
 	getline(cin, Guess);
-	cout << "Your Guess was: " << Guess << endl;
+
+	// Print guess back to Player
+	cout << "Your Guess was: " << Guess << endl << endl;
 	return Guess;
 }
