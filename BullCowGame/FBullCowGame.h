@@ -12,6 +12,6 @@ public:
 
 // ^^ Care only for the code above ^^
 private:
-	int MyCurrentTry;
-	int MyMaxTries;
+	int MyCurrentTry = 1;
+	int MyMaxTries = 5;
 };
