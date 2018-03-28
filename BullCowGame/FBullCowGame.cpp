@@ -5,17 +5,16 @@ FBullCowGame::FBullCowGame() { Reset(); }
 // Put the getters up in the document, following the patterns
 int32 FBullCowGame::GetMyCurrentTry() const {	return MyCurrentTry; }
 int32 FBullCowGame::GetMyMaxTries() const { return MyMaxTries; }
+int32 FBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length(); }
 
 void FBullCowGame::Reset()
 {
 	constexpr int32 MAX_TRIES = 5;
-	MyMaxTries = MAX_TRIES;
-
-	const FString HIDDEN_WORD = "war";
-	MyHiddenWord = HIDDEN_WORD;
-
-	MyCurrentTry = 1;
+	const FString HIDDEN_WORD = "famish";
 	
+	MyMaxTries = MAX_TRIES;
+	MyHiddenWord = HIDDEN_WORD;
+	MyCurrentTry = 1;
 	return;
 }
 
@@ -24,7 +23,7 @@ bool FBullCowGame::IsGameWon() const
 	return false;
 }
 
-bool FBullCowGame::CheckGuessValidity(FString)
+bool FBullCowGame::CheckGuessValidity(FString) const
 {
 	return false;
 }
