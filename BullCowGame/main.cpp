@@ -8,6 +8,7 @@ using int32 = int;
 void PrintIntro();
 void PlayGame();
 void PrintGuess(FText Guess);
+void PrintBullCowCount(FBullCowCount bullCowCount);
 FText GetGuess();
 bool AskToPlayAgain();
 
@@ -51,9 +52,11 @@ void PlayGame()
 		FText Guess = GetGuess(); // TODO make loop check validity of the guess
 
 		// submit valid guess to the game
+		FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
 		// print bulls and cows to player
 
 		PrintGuess(Guess);
+		PrintBullCowCount(BullCowCount);
 	}
 	return;
 }
@@ -81,4 +84,10 @@ bool AskToPlayAgain()
 	FText Response = "";
 	getline(std::cin, Response);
 	return (Response[0] == 'y' || Response[0] == 'Y');
+}
+
+void PrintBullCowCount(FBullCowCount bullCowCount)
+{
+	std::cout << "Bulls: " << bullCowCount.Bulls;
+	std::cout << " Cows: " << bullCowCount.Cows << std::endl;
 }
