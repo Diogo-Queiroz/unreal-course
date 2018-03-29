@@ -50,7 +50,7 @@ void PlayGame()
 		FText Guess = GetValidGuess(); 
 
 		// submit valid guess to the game
-		FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
+		FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
 		// print bulls and cows to player
 
 		PrintGuess(Guess);
@@ -63,14 +63,14 @@ void PlayGame()
 FText GetValidGuess() 
 {
 	EGuessStatus Status = EGuessStatus::Invalid_Status;
+	int32 CurrentTry = BCGame.GetMyCurrentTry();
+	FText Guess = "";
 	do
 	{
-		int32 CurrentTry = BCGame.GetMyCurrentTry();
-		FText Guess = "";
 		std::cout << "Try " << CurrentTry << ". Enter your Guess: ";
 		getline(std::cin, Guess);
 
-		EGuessStatus Status = BCGame.CheckGuessValidity(Guess);
+		Status = BCGame.CheckGuessValidity(Guess);
 		switch (Status)
 		{
 		case EGuessStatus::Not_Isogram:
@@ -85,12 +85,13 @@ FText GetValidGuess()
 		case EGuessStatus::Special_Character_Included:
 			std::cout << "Please enter a guess that has no special character." << std::endl;
 			break;
-		case EGuessStatus::OK:
 		default:
-			return Guess;
+			// assume guess is correct
+			break;
 		}
 		std::cout << std::endl;
 	} while (Status != EGuessStatus::OK); // Keep looping until get no errors	
+	return Guess;
 }
 
 void PrintGuess(FText Guess)

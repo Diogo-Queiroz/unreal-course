@@ -35,7 +35,7 @@ public:
 	void Reset(); // TODO make a more rich return value.
 	EGuessStatus CheckGuessValidity(FString) const;
 	// TODO create a new type to receive a guess, increase the counter of bulls and cows and go to next try #
-	FBullCowCount SubmitGuess(FString);
+	FBullCowCount SubmitValidGuess(FString);
 
 // ^^ Care only for the code above ^^
 private:
