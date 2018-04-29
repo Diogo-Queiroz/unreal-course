@@ -9,6 +9,7 @@ void PrintIntro();
 void PlayGame();
 void PrintGuess(FText Guess);
 void PrintBullCowCount(FBullCowCount BullCowCount);
+void PrintGameSummary();
 FText GetValidGuess();
 bool AskToPlayAgain();
 
@@ -44,8 +45,10 @@ void PlayGame()
 {
 	BCGame.Reset();
 	int32 MaxTries = BCGame.GetMyMaxTries();
-	// Get a Guess from the Player
-	for (int32 i = 1; i <= MaxTries; i++) // TODO change from FOR to WHILE
+
+	// loop asking for guesses while the game
+	// is NOT(!) won and there are still tries remaining
+	while (!BCGame.IsGameWon() && BCGame.GetMyCurrentTry() <= MaxTries)
 	{
 		FText Guess = GetValidGuess(); 
 
@@ -53,9 +56,10 @@ void PlayGame()
 		FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
 		// print bulls and cows to player
 
-		PrintGuess(Guess);
+		PrintGuess(Guess); // TODO eliminate in the final version. OR NOT hehe!
 		PrintBullCowCount(BullCowCount);
 	}
+	PrintGameSummary();
 	return;
 }
 
@@ -113,4 +117,17 @@ void PrintBullCowCount(FBullCowCount BullCowCount)
 {
 	std::cout << "Bulls: " << BullCowCount.Bulls;
 	std::cout << " Cows: " << BullCowCount.Cows << std::endl;
+}
+
+void PrintGameSummary()
+{
+	if (BCGame.IsGameWon())
+	{
+		std::cout << "You WIN the Game!!" << std::endl;
+	}
+	else
+	{
+		std::cout << "Better LUCK next time!!" << std::endl;
+	}
+	return;
 }
